@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row my-5">
+            <div class="products col-3">
+                <!-- <ul class="list-group">
+                    {% for cat in category %}
+                    <a href="category/{{cat.id}}" class="list-group-item list-group-item-action" aria-current="true">
+                        {{cat.category}}
+                    </a>
+                    {% endfor %}
+                </ul> -->
+                {% include 'category.html' %}
+            </div>
+            <div class="category col-9">
+                <div class="row">
+                    {% for i in cate %}
+                    <div class="card mx-auto" style="width: 15rem;">
+                        <img src="/download/{{i.img}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{i.name}}</h5>
+                            <p class="card-text">{{i.price}}</p>
+                            <p class="card-text">{{i.des}}</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

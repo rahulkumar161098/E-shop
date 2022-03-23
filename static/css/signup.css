@@ -1,0 +1,22 @@
+.container{
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 70px;
+}
+.signUpHeading{
+    text-align: center;
+    color: gray;
+}
+.signUpContainter{
+    position: relative;
+}
+.signUpHero{
+    font-size: 100px;
+    color: gray;
+    position: absolute;
+    left:38%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    top: -55px;
+}

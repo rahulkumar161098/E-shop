@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container my-8" style="width: 350px;">
+  <div class="signUpContainter">
+    <i class="fa fa-user signUpHero" aria-hidden="true"></i>
+
+    <form method='POST'>
+      {% csrf_token %}
+      <h3 class="my-3 signUpHeading">Please SignUp</h3>
+
+      <!-- error messages -->
+      {% if messages %}
+      <div class="alert alert-danger">
+        {% for msg in messages %}
+        {{ msg }}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- inputs -->
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" name="email" value="{{ u_name }}" class="form-control" aria-describedby="emailHelp">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
+        <input type="password" name="f_password" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <div class="loginLink">
+        <a href="">Already have an account</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}
