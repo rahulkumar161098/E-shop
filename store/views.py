@@ -7,10 +7,22 @@ from django.contrib.auth import logout
 
 # Create your views here.
 def home(request):
+
+    # add to cart
+    if request.metthod=='POST':
+        product= request.POST.get('pro_id')
+        cart= request.session.get(product)
+        if cart:
+            # qunatity= 
+            cart[product]= 1
+        else:
+            cart={}
+            cart[product]= 1
+
     prod= Product.objects.all()
     cat= Category.objects.all()
-    print('you are : ' ,request.session.get('emailId'))
-    print('you are : ' ,request.session.get('user_id'))
+    print('user id : ' ,request.session.get('user_id'))
+    print('you are : ' ,request.session.get('email'))
     data= {
         'products': prod,
         'category': cat,
@@ -63,8 +75,9 @@ def sign_in(request):
         if userData:
             flag= check_password(password, userData.password)
             if flag:
-                request.session['emailId']= userData.u_name
-                request.session[' user_id']= userData.id
+                # storing session
+                request.session['user_id']= userData.id
+                request.session['email']= userData.u_name
                 return redirect('home')
             else:
                 messages.info(request, 'Invalid password !')

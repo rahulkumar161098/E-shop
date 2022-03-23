@@ -10,5 +10,5 @@ admin.site.register(Product, ProductView)
 #     list_display=('category')
 admin.site.register(Category)
 class userView(admin.ModelAdmin):
-    list_display=('u_name', 'date')
+    list_display=('id', 'u_name', 'date')
 admin.site.register(UserSignUp, userView)
