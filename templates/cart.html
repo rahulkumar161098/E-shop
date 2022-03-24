@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load cart %}
+
+<h1>cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">So no.</th>
+            <th scope="col">Product</th>
+            <th scope="col">Qunatity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for items in cart_product %}
+        <tr class="table-success">
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ items.name }}</td>
+            <td>{{ items | quantity:request.session.cart }}</td>
+            <td>{{ items.price }}</td>
+            <td>{{ items | total_price:request.session.cart}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

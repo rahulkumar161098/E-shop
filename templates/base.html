@@ -27,7 +27,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                data-bs-target=" #navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,19 +42,25 @@
                 </ul>
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                
-                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">
+                        <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 20px; margin-right: 15px;"></i>
+                    </a>
+                </li>
+                {% if request.session.user_id %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'log_out' %}">Log out</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="margin-right: 50px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Profile
+                        <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu" style="margin-right: 40px;" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Order</a></li>
+                        <li><a class="dropdown-item" href="#">Address</a></li>
+                        <li><a class="dropdown-item" href="#">Wish List</a></li>
                     </ul>
                 </li>
                 {% else %}

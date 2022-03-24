@@ -9,16 +9,34 @@ from django.contrib.auth import logout
 def home(request):
 
     # add to cart
-    if request.metthod=='POST':
-        product= request.POST.get('pro_id')
-        cart= request.session.get(product)
+    if request.method=='POST':
+        product_id= request.POST.get('pro_id')
+        remove= request.POST.get('remove')
+        cart= request.session.get('cart')
         if cart:
-            # qunatity= 
-            cart[product]= 1
+            quantity= cart.get(product_id)
+            if quantity:
+                if remove:
+                    if quantity<=1:
+                        cart.pop(product_id)
+                    else:
+                        cart[product_id] = quantity-1
+                else:
+                    cart[product_id] = quantity+1
+            else:
+                cart[product_id] = 1
         else:
-            cart={}
-            cart[product]= 1
+            cart= {}
+            cart[product_id] = 1
+        request.session['cart']= cart
+        print(cart)
+        # print("Product id to add in cart", product_id)
 
+    cart= request.session.get('cart')
+    if not cart:
+        request.session.cart= {}
+
+    # showing all items 
     prod= Product.objects.all()
     cat= Category.objects.all()
     print('user id : ' ,request.session.get('user_id'))
@@ -28,6 +46,7 @@ def home(request):
         'category': cat,
     }
     return render(request, 'home.html', data)
+    # return HttpResponse('hello')
 
 def category(request, cat_id):
     category=Product.objects.filter(category=cat_id)
@@ -50,7 +69,7 @@ def sign_up(request):
         if u_name and pwd and f_pwd !='':
             if pwd == f_pwd:
                 if len(pwd)>=3:
-                    querySave=UserSignUp(u_name=u_name, pwd=hashpwd)
+                    querySave=UserSignUp(u_name=u_name, password=hashpwd)
                     querySave.save()
                     return redirect('signIn')
                 else:
@@ -95,3 +114,15 @@ def sign_in(request):
 def log_out(request):
     logout(request)
     return redirect('home')
+
+
+#View cart
+def cart_views(request):
+    cart=list(request.session.get('cart').keys())
+    cart_product=Product.objects.filter(id__in=cart)
+    print(cart_product)
+    cart_items={
+        'cart_product': cart_product,
+    }
+    # print(cart)
+    return render(request, 'cart.html', cart_items)
