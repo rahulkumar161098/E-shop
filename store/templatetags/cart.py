@@ -26,4 +26,4 @@ def qunatity(product_id, cart):
 
 @register.filter(name='total')
 def total_price(product_id, cart):
-    return product_id.price *qunatity(product_id,cart)
+    return product_id.price * qunatity(product_id, cart)

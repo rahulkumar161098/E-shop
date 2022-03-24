@@ -31,3 +31,14 @@ class UserSignUp(models.Model):
 
     def __str__(self):
         return self.u_name
+
+class UserAddress(models.Model):
+    user= models.ForeignKey('UserSignUp', on_delete=models.CASCADE)
+    name= models.CharField(max_length=50)
+    mobile= models.CharField(max_length=12)
+    local_address= models.CharField(max_length=100)
+    zip_code= models.CharField(max_length=6)
+    lend_mark= models.CharField(max_length=50)
+    city= models.CharField(max_length=30)
+    state= models.CharField(max_length=30)
+    date= models.DateTimeField(auto_now_add=True)
