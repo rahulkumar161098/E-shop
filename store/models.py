@@ -33,7 +33,7 @@ class UserSignUp(models.Model):
         return self.u_name
 
 class UserAddress(models.Model):
-    user= models.ForeignKey('UserSignUp', on_delete=models.CASCADE)
+    user= models.ForeignKey(UserSignUp, on_delete=models.CASCADE)
     name= models.CharField(max_length=50)
     mobile= models.CharField(max_length=12)
     local_address= models.CharField(max_length=100)
@@ -41,4 +41,12 @@ class UserAddress(models.Model):
     lend_mark= models.CharField(max_length=50)
     city= models.CharField(max_length=30)
     state= models.CharField(max_length=30)
+    date= models.DateTimeField(auto_now_add=True)
+
+
+class orders(models.Model):
+    user= models.ForeignKey(UserSignUp, on_delete=models.CASCADE)
+    product= models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity= models.IntegerField(default=1)
+    price= models.IntegerField()
     date= models.DateTimeField(auto_now_add=True)

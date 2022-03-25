@@ -12,7 +12,8 @@ urlpatterns = [
     path('sign-in/', views.sign_in, name="signIn"),
     path('category/<int:cat_id>', views.category),
     path('logout/', views.log_out, name='log_out'),
-    path('cart/', views.cart_views, name='cart')
+    path('cart/', views.cart_views, name='cart'),
+    path('check_out/', views.check_out, name="checkOut")
 ] 
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:

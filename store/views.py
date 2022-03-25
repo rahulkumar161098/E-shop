@@ -126,3 +126,8 @@ def cart_views(request):
     }
     # print(cart)
     return render(request, 'cart.html', cart_items)
+
+
+#check out
+def check_out(request):
+    return render(request, 'orders/order.html')

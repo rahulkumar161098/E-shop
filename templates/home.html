@@ -22,10 +22,10 @@
                     <img src="download/{{product.img}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.price}}</p>
+                        <p class="card-text">{{product.price | rupee_symbol }}</p>
                         <!-- <p class="card-text">{{product.img}}</p> -->
                         <p class="card-text">{{product.des}}</p>
-                        {{ product | in_cart:request.session.cart }}
+                        <!-- {{ product | in_cart:request.session.cart }} -->
                         <!-- add to cart -->
                         <div class="cart-footer row">
                             {% if product|in_cart:request.session.cart %}
