@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .models import Product, Category,UserSignUp
+from .models import Product, Category,UserSignUp, Address
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout
@@ -130,4 +130,22 @@ def cart_views(request):
 
 #check out
 def check_out(request):
-    return render(request, 'orders/order.html')
+    # add new addresses
+    # user_details= UserSignUp.get_email(u_name)
+    # print(user_details)
+    
+    if request.method== 'POST':
+        user=request.POST['userid']
+        name= request.POST['name']
+        mobile= request.POST['mobile']
+        address= request.POST['address']
+        pin= request.POST['pin']
+        lend_mark= request.POST['lend_mark']
+        city= request.POST['city']
+        state= request.POST['state']
+        set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
+        set_address.save()
+
+        return render(request, 'orders/order.html')
+    else:
+        return render(request, 'orders/order.html')

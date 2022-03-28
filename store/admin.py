@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import Product, Category, UserSignUp, UserAddress, orders
+from store.models import Product, Category, UserSignUp, Address, orders
 
 # Register your models here.
 class ProductView(admin.ModelAdmin):
@@ -16,7 +16,7 @@ admin.site.register(UserSignUp, userView)
 #user address views
 class addressViews(admin.ModelAdmin):
     list_diaplay=('user', 'name', 'mobile', 'date', 'zip_code')
-admin.site.register(UserAddress, addressViews)
+admin.site.register(Address, addressViews)
 
 #order views
 class OrderViews(admin.ModelAdmin):

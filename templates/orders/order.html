@@ -4,65 +4,74 @@
 {% load cart %}
 
 <div class="container" style="width: 50%; ">
-    <div>
-        <p>Total price</p>
+  <div>
+    <p>Total price</p>
 
-    </div>
-    <div class="address" style="border: 1px solid gray; width: 400px; height: max-content;">
-        <p>Name</p>
-        <p>Mobile no</p>
-        <p>local address</p>
+  </div>
+  <div class="address" style="border: 1px solid gray; width: 400px; height: max-content;">
+    <p>Name</p>
+    <p>Mobile no</p>
+    <p>local address</p>
 
-    </div>
-    <div>
-        
+  </div>
+  <div>
 
-        <!-- Button trigger modal -->
-<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="name" placeholder="Mobile no" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="name" placeholder="Local address" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="name" placeholder="City" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="name" placeholder="Pin Code" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="name" placeholder="State" style="margin-bottom: 10px;">
-        </div>
-        <div class="modal-footer">
-          <input type="submit" value="Save">
+
+    <!-- Button trigger modal -->
+    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add new Address
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">s
+              {% csrf_token %}
+              <input type="text" value='{{ request.session.user_id }}' name='userid'>
+              <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="mobile" placeholder="Mobile no"
+                style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="address" placeholder="Local address"
+                style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="lend_mark" placeholder="Land_mark"
+                style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="city" placeholder="City" style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;">
+              <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;">
+              <div class="modal-footer">
+                <input type="submit" value="Add">
+              </div>
+            </form>
+          </div>
+
         </div>
       </div>
     </div>
+
+
+
   </div>
-  
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="" class="btn btn-outline-secondary">Order Place</a>
+  </div>
 
 
-    </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="" class="btn btn-outline-secondary">Order Place</a>
-    </div>
-
-      
 
 </div>
 
 {% endblock %}
 <script>
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
+  var myModal = document.getElementById('myModal')
+  var myInput = document.getElementById('myInput')
 
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
+  myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+  })
 
 </script>
