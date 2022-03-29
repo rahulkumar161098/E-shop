@@ -14,9 +14,9 @@ class userView(admin.ModelAdmin):
 admin.site.register(UserSignUp, userView)
 
 #user address views
-class addressViews(admin.ModelAdmin):
-    list_diaplay=('user', 'name', 'mobile', 'date', 'zip_code')
-admin.site.register(Address, addressViews)
+class UserAddress(admin.ModelAdmin):
+    list_display=('user_id', 'name', 'mobile', 'state',  'zip_code', 'date')
+admin.site.register(Address, UserAddress)
 
 #order views
 class OrderViews(admin.ModelAdmin):

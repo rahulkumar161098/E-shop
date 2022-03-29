@@ -130,10 +130,15 @@ def cart_views(request):
 
 #check out
 def check_out(request):
-    # add new addresses
-    # user_details= UserSignUp.get_email(u_name)
-    # print(user_details)
-    
+    # show user address
+    u_id=request.session.get('user_id')
+    print(u_id)
+    userAddress= Address.objects.filter(user_id=u_id)
+    print(userAddress)
+    allAddress={
+        'userAddress': userAddress
+    }
+    # save address of the user
     if request.method== 'POST':
         user=request.POST['userid']
         name= request.POST['name']
@@ -143,9 +148,12 @@ def check_out(request):
         lend_mark= request.POST['lend_mark']
         city= request.POST['city']
         state= request.POST['state']
-        set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
-        set_address.save()
+        if user and name and mobile and address and pin and city and state  !='':
 
-        return render(request, 'orders/order.html')
-    else:
-        return render(request, 'orders/order.html')
+            set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
+            set_address.save()
+            return render(request, 'orders/order.html')
+        else:
+            messages.info(request, "All fields are required")
+            return render(request, 'orders/order.html')
+    return render(request, 'orders/order.html', allAddress)

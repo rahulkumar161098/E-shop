@@ -9,9 +9,15 @@
 
   </div>
   <div class="address" style="border: 1px solid gray; width: 400px; height: max-content;">
-    <p>Name</p>
-    <p>Mobile no</p>
-    <p>local address</p>
+    {% for address in userAddress %}
+    <div>
+    {{address.name}}<br/>
+    {{address.mobile}}<br/>
+    {{address.local_address}}<br/>
+    {{address.city}}
+    <hr>
+    </div>
+    {% endfor %}
 
   </div>
   <div>
@@ -31,9 +37,18 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="POST">s
+            <!-- show message -->
+            {% if messages %}
+              <div class="alert alert-danger" role="alert">
+                {% for msg in messages %}
+                  {{ msg }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="POST">
               {% csrf_token %}
-              <input type="text" value='{{ request.session.user_id }}' name='userid'>
+              <input type="text" hidden value='{{ request.session.user_id }}' name='userid'>
               <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
               <input type="text" class="form-control" name="mobile" placeholder="Mobile no"
                 style="margin-bottom: 10px;">
@@ -45,11 +60,10 @@
               <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;">
               <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;">
               <div class="modal-footer">
-                <input type="submit" value="Add">
+                <input type="submit" value="Add" target='#exampleModal'>
               </div>
             </form>
           </div>
-
         </div>
       </div>
     </div>
@@ -58,7 +72,7 @@
 
   </div>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="" class="btn btn-outline-secondary">Order Place</a>
+    <a href="#" class="btn btn-outline-secondary">Order Place</a>
   </div>
 
 
