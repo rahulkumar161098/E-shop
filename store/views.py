@@ -4,6 +4,7 @@ from .models import Product, Category,UserSignUp, Address
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout
+from .templatetags.cart import total_price
 
 # Create your views here.
 def home(request):
@@ -133,10 +134,13 @@ def check_out(request):
     # show user address
     u_id=request.session.get('user_id')
     print(u_id)
+    cart= list(request.session.get('cart').keys())
+    print(cart)
     userAddress= Address.objects.filter(user_id=u_id)
     print(userAddress)
     allAddress={
-        'userAddress': userAddress
+        'userAddress': userAddress,
+        'cart' : cart,
     }
     # save address of the user
     if request.method== 'POST':
@@ -152,8 +156,31 @@ def check_out(request):
 
             set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
             set_address.save()
-            return render(request, 'orders/order.html')
+            return redirect('checkOut')
         else:
             messages.info(request, "All fields are required")
-            return render(request, 'orders/order.html')
+            return redirect('checkOut')
     return render(request, 'orders/order.html', allAddress)
+
+
+
+# payment function or fimall process
+def payment(request):
+   
+    cart= request.session.get('cart').keys()
+    cart1= request.session.get('cart')
+    print(cart1)
+    # print(get('cart'))
+    total_items_in_cart=len(cart)
+    print("items in cart: ", cart)
+    cart_product=Product.objects.filter(id__in=cart)
+    # price= total_price(product_id, cart)
+    # print(price)
+    delivery_charge= 50
+    cart_info= {
+        'total_items_in_cart': total_items_in_cart,
+        'cart_product' : cart_product,
+        'delivery_charge' : delivery_charge,
+        'cart1':cart1
+    }
+    return render(request, 'orders/payment.html', cart_info)

@@ -28,6 +28,7 @@ def total_price(product_id, cart):
     return product_id.price * qunatity(product_id, cart)
 
 
+
 @register.filter(name="total_cart_price")
 def cart_total_price(product_id, cart):
     sum=0
@@ -40,3 +41,4 @@ def cart_total_price(product_id, cart):
 @register.filter(name="rupee_symbol")
 def currency(number):
     return "₹ "+ str(number)
+

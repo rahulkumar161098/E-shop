@@ -4,76 +4,82 @@
 {% load cart %}
 
 <div class="container" style="width: 50%; ">
+  <!-- show message -->
+  {% if messages %}
+  <div class="alert alert-danger" role="alert">
+    {% for msg in messages %}
+    {{ msg }}
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <div>
-    <p>Total price</p>
+    <p>{{ allAddress | total_cart_price:request.session.cart | rupee_symbol }}</p>
 
   </div>
   <div class="address" style="border: 1px solid gray; width: 400px; height: max-content;">
     {% for address in userAddress %}
     <div>
-    {{address.name}}<br/>
-    {{address.mobile}}<br/>
-    {{address.local_address}}<br/>
-    {{address.city}}
-    <hr>
+      {{address.name}}<br />
+      {{address.mobile}}<br />
+      {{address.local_address}}<br />
+      {{address.city}}
+      <hr>
     </div>
     {% endfor %}
 
   </div>
   <div>
-
-
     <!-- Button trigger modal -->
     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Add new Address
     </button>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'payment_link' %}" class="btn btn-outline-secondary">Order Place</a>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- show message -->
-            {% if messages %}
-              <div class="alert alert-danger" role="alert">
-                {% for msg in messages %}
-                  {{ msg }}
-                {% endfor %}
-              </div>
-            {% endif %}
 
-            <form method="POST">
-              {% csrf_token %}
-              <input type="text" hidden value='{{ request.session.user_id }}' name='userid'>
-              <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="mobile" placeholder="Mobile no"
-                style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="address" placeholder="Local address"
-                style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="lend_mark" placeholder="Land_mark"
-                style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="city" placeholder="City" style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;">
-              <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;">
-              <div class="modal-footer">
-                <input type="submit" value="Add" target='#exampleModal'>
-              </div>
-            </form>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- show message -->
+          {% if messages %}
+          <div class="alert alert-danger" role="alert">
+            {% for msg in messages %}
+            {{ msg }}
+            {% endfor %}
           </div>
+          {% endif %}
+
+          <form method="POST">
+            {% csrf_token %}
+            <input type="text" hidden value='{{ request.session.user_id }}' name='userid'>
+            <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="mobile" placeholder="Mobile no" style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="address" placeholder="Local address"
+              style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="lend_mark" placeholder="Land_mark"
+              style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="city" placeholder="City" style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;">
+            <div class="modal-footer">
+              <input type="submit" value="Add" target='#exampleModal'>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-
-
   </div>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="#" class="btn btn-outline-secondary">Order Place</a>
-  </div>
+
 
 
 

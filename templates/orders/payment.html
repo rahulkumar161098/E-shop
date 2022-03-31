@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart %}
+
+<div class="container" style="width: 40%; border: 1px solid gray; height: max-content;">
+
+    <div>
+        <h4>Total amount : <span>{{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span></h4>
+    </div>
+    <hr color="lightgreen">
+    <div class="product" >
+        <h5>All Products are : <span>{{total_items_in_cart}}</span></h5>
+        <div style="border: 1px solid gray; position: relative;">
+            <div style="width: 70%; position: absolute; right: 0; padding-top: 4px;">
+                <table class="table">
+                    <tbody>
+                        {% for items in cart_product %}
+                        <tr>
+                            <td><img src="{{ items.img.url }}" alt=""
+                                    style="width: 50px; height: 30px; object-fit: cover;">
+                            </td>
+                            <td>{{ items.name }}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="width: 30%;">
+                <table class="table">
+                    <tbody>
+                        {% for key, value in cart1.items %}
+                        <tr>
+                            <td>
+                                {{value}}
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="we_accept">
+        <span>Price : {{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span><br>
+
+        {% if cart_product|total_cart_price:request.session.cart <= 500 %} <span>Delivery : {{delivery_charge |
+            rupee_symbol}} </span><br>
+
+            {% else %}
+            <span>Free Delivery </span><br>
+            {% endif %}
+
+            <span>Total Price : {{cart_product|total_cart_price:request.session.cart }} </span>
+    </div>
+    <div class="payment_btn" style="text-align: right;">
+        <button>Payment</button>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+<!-- {% for key, value in cart1.items %}
+{{ value }}
+{% endfor %} <span>qty</span> -->
