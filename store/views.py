@@ -133,14 +133,32 @@ def cart_views(request):
 def check_out(request):
     # show user address
     u_id=request.session.get('user_id')
-    print(u_id)
+    # print(u_id)
     cart= list(request.session.get('cart').keys())
-    print(cart)
+    print('keys',cart)
     userAddress= Address.objects.filter(user_id=u_id)
-    print(userAddress)
+    # print(userAddress)
+
+    # count no of a paticular product
+    items_of_a_product= request.session.get('cart')
+
+    # Count all product
+    cart_all_items= request.session.get('cart')
+    total_no_of_items=len(cart_all_items)
+
+    # delivery charge
+    delivey_charge= 50
+
+    # get total amount 
+    cart_product=Product.objects.filter(id__in=cart)
+    print("card",cart_product)
     allAddress={
         'userAddress': userAddress,
         'cart' : cart,
+        'cart_product': cart_product,
+        'total_no_of_items': total_no_of_items,
+        'items_of_a_product': items_of_a_product,
+        'delivey_charge': delivey_charge
     }
     # save address of the user
     if request.method== 'POST':
@@ -152,6 +170,8 @@ def check_out(request):
         lend_mark= request.POST['lend_mark']
         city= request.POST['city']
         state= request.POST['state']
+
+        # form validations
         if user and name and mobile and address and pin and city and state  !='':
 
             set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)

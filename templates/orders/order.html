@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/order.css' %}">
+{% endblock %}
 
 {% block content %}
 {% load cart %}
@@ -13,11 +18,53 @@
   </div>
   {% endif %}
 
+  <!-- total amount for payment -->
   <div>
-    <p>{{ allAddress | total_cart_price:request.session.cart | rupee_symbol }}</p>
-
+    <h3>Total : {{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</h3>
   </div>
-  <div class="address" style="border: 1px solid gray; width: 400px; height: max-content;">
+
+  <!-- all product list -->
+  <div>
+    <h5>All product are : {{ total_no_of_items }}</h5>
+  </div>
+
+  <!-- cart list section -->
+  <div class="row hello" style="width: 100%; height: 100px; border: 1px solid gray; overflow: scroll;">
+    <div class="col-md-8">
+      <table class="table">
+        <tbody>
+          {% for items in cart_product %}
+          <tr>
+            <!-- <th scope="row">{{ forloop.counter }}</th> -->
+            <td>
+              <img src="{{ items.img.url }}" alt="" style="width: 50px; height: 23px; object-fit: cover;">
+            </td>
+            <td>{{items.name}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table">
+        <tbody>
+          {% for key, value in items_of_a_product.items %}
+          <tr class="text-center">
+            <td>
+              {{ value }} <span>Qty</span>
+            </td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- address section -->
+  <span">Please select address</span>
+  <div class="address" style="border: 1px solid gray; width: 100%; height: 150px; overflow: scroll;">
+
     {% for address in userAddress %}
     <div>
       {{address.name}}<br />
@@ -34,6 +81,24 @@
     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Add new Address
     </button>
+  </div>
+
+  <!-- final amount -->
+  <div class="total_amount">
+    <span>Amount : {{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span>
+    <br>
+    {% if cart_product|total_cart_price:request.session.cart <= 500 %}
+    <span>Delivery : {{delivey_charge}}</span> <br>
+    
+    {% else %}
+    <span>Free Delivery </span><br>
+    {% endif %}
+
+    <!-- total amount -->
+    <span>Total amount : {{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span>
+    
+
+    <!-- refers to payment button -->
   </div>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a href="{% url 'payment_link' %}" class="btn btn-outline-secondary">Order Place</a>
@@ -62,15 +127,15 @@
           <form method="POST">
             {% csrf_token %}
             <input type="text" hidden value='{{ request.session.user_id }}' name='userid'>
-            <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="mobile" placeholder="Mobile no" style="margin-bottom: 10px;">
+            <input type="text" class="form-control" name="name" placeholder="Name" style="margin-bottom: 10px;" required>
+            <input type="text" class="form-control" name="mobile" placeholder="Mobile no" style="margin-bottom: 10px;" required>
             <input type="text" class="form-control" name="address" placeholder="Local address"
-              style="margin-bottom: 10px;">
+              style="margin-bottom: 10px;" required>
             <input type="text" class="form-control" name="lend_mark" placeholder="Land_mark"
-              style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="city" placeholder="City" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;">
-            <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;">
+              style="margin-bottom: 10px;" required>
+            <input type="text" class="form-control" name="city" placeholder="City" style="margin-bottom: 10px;" required>
+            <input type="text" class="form-control" name="pin" placeholder="Pin Code" style="margin-bottom: 10px;" required>
+            <input type="text" class="form-control" name="state" placeholder="State" style="margin-bottom: 10px;" required>
             <div class="modal-footer">
               <input type="submit" value="Add" target='#exampleModal'>
             </div>

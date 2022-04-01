@@ -9,7 +9,7 @@
         <h4>Total amount : <span>{{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span></h4>
     </div>
     <hr color="lightgreen">
-    <div class="product" >
+    <!-- <div class="product" >
         <h5>All Products are : <span>{{total_items_in_cart}}</span></h5>
         <div style="border: 1px solid gray; position: relative;">
             <div style="width: 70%; position: absolute; right: 0; padding-top: 4px;">
@@ -33,7 +33,7 @@
                         {% for key, value in cart1.items %}
                         <tr>
                             <td>
-                                {{value}}
+                                {{value }} <span>Qty</span>
                             </td>
                             {% endfor %} 
                         </tr>
@@ -42,11 +42,12 @@
             </div>
 
         </div>
-    </div>
-    <div class="we_accept">
+    </div> -->
+    <!-- <div class="we_accept">
         <span>Price : {{ cart_product | total_cart_price:request.session.cart | rupee_symbol }}</span><br>
 
-        {% if cart_product|total_cart_price:request.session.cart <= 500 %} <span>Delivery : {{delivery_charge |
+        {% if cart_product|total_cart_price:request.session.cart <= 500 %} 
+        <span>Delivery : {{delivery_charge |
             rupee_symbol}} </span><br>
 
             {% else %}
@@ -54,7 +55,20 @@
             {% endif %}
 
             <span>Total Price : {{cart_product|total_cart_price:request.session.cart }} </span>
+    </div> -->
+
+
+    <!-- Payment method -->
+    <div>
+        <span>Cash on Delivery</span><br>
+        <span>Google Pay</span><br>
+        <span>Phone Pay</span><br>
+        <span>Net Banking</span><br>
+
     </div>
+    
+    
+
     <div class="payment_btn" style="text-align: right;">
         <button>Payment</button>
     </div>
