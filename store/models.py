@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -48,8 +49,15 @@ class Address(models.Model):
 
 
 class orders(models.Model):
-    user= models.ForeignKey(UserSignUp, on_delete=models.CASCADE)
-    product= models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity= models.IntegerField(default=1)
-    price= models.IntegerField()
-    date= models.DateTimeField(auto_now_add=True)
+    DELIVERY_STATUS=[
+        ('PN', 'Panding'),
+        ('AC', 'Accepted'),
+        ('OD', 'Out for Delivery'),
+    ]
+    userId= models.ForeignKey(UserSignUp, on_delete=models.CASCADE, default=0,null=True)
+    product= models.ForeignKey(Product, on_delete=models.CASCADE, default=0, null=True)
+    addressId= models.ForeignKey(Address, on_delete=models.CASCADE, default=0, null=True)
+    cart_product= models.CharField(max_length=500, null=True, default=0)
+    total_amoumt= models.IntegerField(default=0)
+    status= models.CharField(choices=DELIVERY_STATUS, max_length=10, default='panding')
+    date= models.DateTimeField(auto_now_add=True, null=True)

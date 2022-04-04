@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout
 from .templatetags.cart import total_price
+import razorpay  
+# payment getway
 
 # Create your views here.
 def home(request):
@@ -204,3 +206,28 @@ def payment(request):
         'cart1':cart1
     }
     return render(request, 'orders/payment.html', cart_info)
+
+
+#payment gateway (RarorPay)
+# import razorpay
+# client = razorpay.Client(auth=("", ""))
+
+
+# amount= 100,
+# currency= "INR",
+# client = razorpay.Client(auth=("rzp_test_3Xjh9rRVSDJ3Lu", "HzIgyX5NwXq2BnUkx4ot3uLx"))
+# payment= client.order.create({amount: 'amount', 'currency': "INR",'payment_capture': '0'})
+    # "receipt": "receipt#1",
+    # "notes": {
+    #     "key1": "value3",
+    #     "key2": "value2"
+    # }
+
+# import razorpay
+client = razorpay.Client(auth=("rzp_test_3Xjh9rRVSDJ3Lu", "HzIgyX5NwXq2BnUkx4ot3uLx"))
+
+amount= 100,
+currency= "INR",
+
+# payment= client.order.create({'amount': amount, 'currency': "INR",'payment_capture': '0'})
+# client.order.create(data=DATA)

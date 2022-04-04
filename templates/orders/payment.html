@@ -59,21 +59,64 @@
 
 
     <!-- Payment method -->
-    <div>
+    <!-- <div>
         <span>Cash on Delivery</span><br>
         <span>Google Pay</span><br>
         <span>Phone Pay</span><br>
         <span>Net Banking</span><br>
 
+    </div> -->
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+            Google Pay
+        </label>
     </div>
-    
-    
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+            Phone Pay
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+            Net Banking
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+            Cash on Delivery
+        </label>
+    </div>
+
+
+
 
     <div class="payment_btn" style="text-align: right;">
         <button>Payment</button>
     </div>
 
 </div>
+
+
+
+<form action="https://www.example.com/payment/success/" method="POST">
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_3Xjh9rRVSDJ3Lu" data-amount='50000'
+        data-currency="INR" 
+        data-order_id='{{payment.id}}' 
+        data-buttontext="Place order" 
+        data-name="E-shop"
+        data-description="Pay with sefty"
+        data-image="https://picsum.photos/110/110" 
+        data-prefill.name="Rahul Kumar"
+        data-prefill.email="rahul.kumar@example.com" 
+        data-theme.color="#63c9e0">
+        </script>
+
+    <input type="hidden" custom="Hidden Element" name="hidden">
+</form>
 
 
 {% endblock %}
