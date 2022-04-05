@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="../static/css/home.css">
+
+{% endblock %}
 
 {% block content %}
 
 {% load cart %}
-<div class="container-fluid">
-    <div class="row my-5">
-        <div class="products col-3">
+<div class="main_section">
+    <div class="row">
+        <div class="products_category col-2">
             <!-- <ul class="list-group">
                 {% for cat in category %}
                 <a href="category/{{cat.id}}" class="list-group-item list-group-item-action" aria-current="true">
@@ -15,7 +21,15 @@
             </ul> -->
             {% include 'category.html' %}
         </div>
-        <div class="category col-9">
+        <div class="category col-10">
+
+            <!-- top slider -->
+            <div class="top_slider">
+                {% include 'slider.html' %}
+            </div>
+            <div class="product_heading">
+                Deal of the day
+            </div>
             <div class="row">
                 {% for product in products %}
                 <div class="card mx-auto" id={{product.id}} style="width: 15rem;">
@@ -36,7 +50,8 @@
                                     <input type="text" hidden value="True" name="remove">
                                     <input type="submit" value=" - " class="btn btn-secondary">
                                 </form>
-                                <input type="text" value="{{ product | quantity:request.session.cart }} in cart" class="col-8 text-center">
+                                <input type="text" value="{{ product | quantity:request.session.cart }} in cart"
+                                    class="col-8 text-center">
                                 <form action="/#{{product.id}}" method='POST' class="col-2">
                                     {% csrf_token %}
                                     <input type="text" hidden value="{{ product.id }}" name="pro_id">
@@ -60,7 +75,17 @@
                 </div>
                 {% endfor %}
             </div>
+
+            <div class="product_heading">
+                mobiles
+            </div>
+            <!-- mobile section -->
+
+            
         </div>
     </div>
 </div>
+
+
 {% endblock %}
+

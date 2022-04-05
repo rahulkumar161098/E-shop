@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.products_category{
+    position:static;
+}
+.top_slider{
+    width: 100%;
+    height: 230px;
+    /* border: 1px solid gray; */
+}
+.owl-item img{
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+.product_heading{
+    font-size: 25px;
+    font-weight: 550;
+    margin: 10px 0px 10px 7px;
+    color: gray;
+}
+.meddile_slider{
+    width: 100%;
+    height: 10px;
+    border: 1px solid gray;
+}
