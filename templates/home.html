@@ -3,6 +3,7 @@
 
 {% block cssfile %}
 <link rel="stylesheet" href="../static/css/home.css">
+<link rel="stylesheet" href="../static/css/card.css">
 
 {% endblock %}
 
@@ -11,17 +12,14 @@
 {% load cart %}
 <div class="main_section">
     <div class="row">
+
+        <!-- category section -->
         <div class="products_category col-2">
-            <!-- <ul class="list-group">
-                {% for cat in category %}
-                <a href="category/{{cat.id}}" class="list-group-item list-group-item-action" aria-current="true">
-                    {{cat.category}}
-                </a>
-                {% endfor %}
-            </ul> -->
             {% include 'category.html' %}
         </div>
-        <div class="category col-10">
+
+        <!-- product section -->
+        <div class="col-10">
 
             <!-- top slider -->
             <div class="top_slider">
@@ -30,62 +28,158 @@
             <div class="product_heading">
                 Deal of the day
             </div>
-            <div class="row">
+
+            <!-- other card -->
+            <div class="section_products" >
                 {% for product in products %}
-                <div class="card mx-auto" id={{product.id}} style="width: 15rem;">
-                    <img src="download/{{product.img}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.price | rupee_symbol }}</p>
-                        <!-- <p class="card-text">{{product.img}}</p> -->
-                        <p class="card-text">{{product.des}}</p>
-                        <!-- {{ product | in_cart:request.session.cart }} -->
-                        <!-- add to cart -->
-                        <div class="cart-footer row">
-                            {% if product|in_cart:request.session.cart %}
-                            <div class="row">
-                                <form action="/#{{product.id}}" method='POST' class="col-2">
-                                    {% csrf_token %}
-                                    <input type="text" hidden value="{{ product.id }}" name="pro_id">
-                                    <input type="text" hidden value="True" name="remove">
-                                    <input type="submit" value=" - " class="btn btn-secondary">
-                                </form>
-                                <input type="text" value="{{ product | quantity:request.session.cart }} in cart"
-                                    class="col-8 text-center">
-                                <form action="/#{{product.id}}" method='POST' class="col-2">
-                                    {% csrf_token %}
-                                    <input type="text" hidden value="{{ product.id }}" name="pro_id">
-                                    <input type="submit" value=" + " class="btn btn-secondary">
-                                </form>
-                            </div>
-                            {% else %}
-                            <!-- add to cart -->
-                            <div class="row">
-                                <form action="/#{{product.id}}" method='POST' class="d-grid gap-2">
-                                    {% csrf_token %}
-                                    <input type="text" hidden value="{{ product.id }}" name="pro_id">
-                                    <input type="submit" value="Add to cart" class="btn btn-block btn-primary ">
-                                </form>
-                            </div>
-                            {% endif %}
+                <div class="product_card" id='{{product.id}}'>
+                    <div class="product_img">
+                        <img src="download/{{product.img}}" alt="">
+                        <div class="heart_icon">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+
                         </div>
-                        </footer>
-                        <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
                     </div>
+                    <div class="product_body">
+                        <div class="product_title">
+                            {{ product.name }}
+                        </div>
+                        <div class="product_desc">
+                            {{product.des}}
+                        </div>
+                        <div class="product_price">
+                            <div class="actula_price">
+                                {{product.price | rupee_symbol }}
+                            </div>
+                            <div class="selling_price">
+                                <del>499</del>
+                            </div>
+                            <div class="discount">
+                                50%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card_footer">
+                        {% if product|in_cart:request.session.cart %}
+                        <div class="added_in_cart">
+                            <form action="/#{{product.id}}" method='POST'>
+                                {% csrf_token %}
+                                <input type="text" hidden value="{{ product.id }}" name="pro_id">
+                                <input type="text" hidden value="True" name="remove">
+                                <input type="submit" value=" - " class="minus_btn">
+                            </form>
+                            <input type="text" value="{{ product | quantity:request.session.cart }} in cart"
+                                class="product_in_card_container">
+                            <form action="/#{{product.id}}" method='POST'>
+                                {% csrf_token %}
+                                <input type="text" hidden value="{{ product.id }}" name="pro_id">
+                                <input type="submit" value=" + " class="pluse_btn">
+                            </form>
+                        </div>
+                        {% else %}
+                        <!-- <input type="submit" class="footer_btn" value="Add to Cart"> -->
+                        <form action="/#{{product.id}}" method='POST'>
+                            {% csrf_token %}
+                            <input type="text" hidden value="{{ product.id }}" name="pro_id">
+                            <input type="submit" value="Add to cart" class="footer_btn ">
+                        </form>
+                        {% endif %}
+                    </div>
+
                 </div>
                 {% endfor %}
             </div>
 
-            <div class="product_heading">
-                mobiles
-            </div>
             <!-- mobile section -->
+            <div class="section_heading">
+                <div class="section_title">
+                    Mobile
+                </div>
+                <div class="section_link">
+                    <a href=""> See All </a>
+                </div>
+            </div>
+            <div class="section_products">
+                <div class="section_products" >
+                    {% for mobile in filter_by_mobile %}
+                    <div class="product_card" id='{{mobile.id}}'>
+                        <div class="product_img">
+                            <img src="download/{{mobile.img}}" alt="">
+                            <div class="heart_icon">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+    
+                            </div>
+                        </div>
+                        <div class="product_body">
+                            <div class="product_title">
+                                {{ mobile.name }}
+                            </div>
+                            <div class="product_desc">
+                                {{mobile.des}}
+                            </div>
+                            <div class="product_price">
+                                <div class="actula_price">
+                                    {{mobile.price | rupee_symbol }}
+                                </div>
+                                <div class="selling_price">
+                                    <del>499</del>
+                                </div>
+                                <div class="discount">
+                                    50%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card_footer">
+                            {% if mobile|in_cart:request.session.cart %}
+                            <div class="added_in_cart">
+                                <form action="/#{{mobile.id}}" method='POST'>
+                                    {% csrf_token %}
+                                    <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                                    <input type="text" hidden value="True" name="remove">
+                                    <input type="submit" value=" - " class="minus_btn">
+                                </form>
+                                <input type="text" value="{{ mobile | quantity:request.session.cart }} in cart"
+                                    class="product_in_card_container">
+                                <form action="/#{{mobile.id}}" method='POST'>
+                                    {% csrf_token %}
+                                    <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                                    <input type="submit" value=" + " class="pluse_btn">
+                                </form>
+                            </div>
+                            {% else %}
+                            <!-- <input type="submit" class="footer_btn" value="Add to Cart"> -->
+                            <form action="/#{{mobile.id}}" method='POST'>
+                                {% csrf_token %}
+                                <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                                <input type="submit" value="Add to cart" class="footer_btn ">
+                            </form>
+                            {% endif %}
+                        </div>
+    
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-            
+
+            <!-- cloth section -->
+            <div class="section_heading">
+                <div class="section_title">
+                    Women Wear
+                </div>
+                <div class="section_link">
+                    <a href=""> See All </a>
+                </div>
+            </div>
+            <div class="section_products">
+
+            </div>
+
+
+
         </div>
     </div>
 </div>
 
 
 {% endblock %}
-

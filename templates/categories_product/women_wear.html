@@ -1,0 +1,108 @@
+{% load cart %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <!-- <link rel="stylesheet" href="../static/css/slider.css"> -->
+    <!-- <link rel="stylesheet" href="../static/css/owl.carousel.css"> -->
+    <link rel="stylesheet" href="../../static/css/categories_product.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+
+
+    <script src="../static/js/owl.carousel.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="owl-carousel owl-theme">
+        {% for mobile in filter_by_mobile %}
+        <div>
+            <a href="">
+                <div class="product_card" id='{{mobile.id}}'>
+                    <div class="product_img">
+                        <img src="download/{{mobile.img}}" alt="">
+                        <div class="heart_icon">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+
+                        </div>
+                    </div>
+                    <div class="product_body">
+                        <div class="product_title">
+                            {{ mobile.name }}
+                        </div>
+                        <div class="product_desc">
+                            {{mobile.des}}
+                        </div>
+                        <div class="product_price">
+                            <div class="actula_price">
+                                {{mobile.price | rupee_symbol }}
+                            </div>
+                            <div class="selling_price">
+                                <del>499</del>
+                            </div>
+                            <div class="discount">
+                                50%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card_footer">
+                        {% if mobile|in_cart:request.session.cart %}
+                        <div class="added_in_cart">
+                            <form action="/#{{mobile.id}}" method='POST'>
+                                {% csrf_token %}
+                                <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                                <input type="text" hidden value="True" name="remove">
+                                <input type="submit" value=" - " class="minus_btn">
+                            </form>
+                            <input type="text" value="{{ mobile | quantity:request.session.cart }} in cart"
+                                class="product_in_card_container">
+                            <form action="/#{{mobile.id}}" method='POST'>
+                                {% csrf_token %}
+                                <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                                <input type="submit" value=" + " class="pluse_btn">
+                            </form>
+                        </div>
+                        {% else %}
+                        <!-- <input type="submit" class="footer_btn" value="Add to Cart"> -->
+                        <form action="/#{{mobile.id}}" method='POST'>
+                            {% csrf_token %}
+                            <input type="text" hidden value="{{ mobile.id }}" name="pro_id">
+                            <input type="submit" value="Add to cart" class="footer_btn ">
+                        </form>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+
+
+    <!-- <script src="../static/js/owl.carousel.min.js"></script> -->
+    <script>
+        $('.owl-carousel').owlCarousel({
+            autoplay: true,
+            items: 4,
+            margin: 0,
+            loop: true,
+            // animateOut: 'slideOutDown'
+        })
+    </script>
+</body>
+
+
+</html>

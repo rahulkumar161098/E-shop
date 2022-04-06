@@ -41,12 +41,15 @@ def home(request):
 
     # showing all items 
     prod= Product.objects.all()
+    filter_by_mobile= Product.objects.filter(category=4)
+    print('filer_by_mobile : ',filter_by_mobile)
     cat= Category.objects.all()
     print('user id : ' ,request.session.get('user_id'))
     print('you are : ' ,request.session.get('email'))
     data= {
         'products': prod,
         'category': cat,
+        'filter_by_mobile': filter_by_mobile,
     }
     return render(request, 'home.html', data)
     # return HttpResponse('hello')
@@ -183,7 +186,6 @@ def check_out(request):
             messages.info(request, "All fields are required")
             return redirect('checkOut')
     return render(request, 'orders/order.html', allAddress)
-
 
 
 # payment function or fimall process
