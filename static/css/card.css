@@ -29,7 +29,7 @@
 .heart_icon i{
     margin: 5px 0px 0px 10px;
     font-size: 20px;
-    color: whitesmoke;
+    color: rgb(207, 207, 207);
 }
 .heart_icon i:hover{
     color: rgb(253, 46, 46);

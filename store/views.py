@@ -1,3 +1,5 @@
+from optparse import Values
+from re import U
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Product, Category,UserSignUp, Address
@@ -40,7 +42,7 @@ def home(request):
         request.session.cart= {}
 
     # showing all items 
-    prod= Product.objects.all()
+    prod= Product.objects.filter(category=1)
     filter_by_mobile= Product.objects.filter(category=4)
     print('filer_by_mobile : ',filter_by_mobile)
     cat= Category.objects.all()
@@ -65,6 +67,7 @@ def category(request, cat_id):
 
 def sign_up(request):
     if request.method== 'POST':
+        # user inputes
         u_name= request.POST['email']
         pwd= request.POST['password']
         hashpwd= make_password(pwd)
@@ -72,21 +75,29 @@ def sign_up(request):
         data= {
             'u_name': u_name
         }
+        # checking all fields are filled
         if u_name and pwd and f_pwd !='':
-            if pwd == f_pwd:
-                if len(pwd)>=3:
-                    querySave=UserSignUp(u_name=u_name, password=hashpwd)
-                    querySave.save()
-                    return redirect('signIn')
-                else:
-                    messages.info(request, "Password should be 8 charaters")
-                    # print("length error")
-                    return render(request, 'signup.html', data)
+            # cheking user existance
+            if UserSignUp.objects.filter(u_name = u_name):
+                messages.info(request,'User already exist Please try another!')
+                return render(request, 'signup.html')
             else:
-                messages.info(request, "Password doesn't match")
-                return render(request, 'signup.html', data)
+                # matching password
+                if pwd == f_pwd:
+                    #set password length
+                    if len(pwd)>=3:
+                        querySave=UserSignUp(u_name=u_name, password=hashpwd)
+                        querySave.save()
+                        return redirect('signIn')
+                    else:
+                        messages.info(request, "Password should be 8 charaters!")
+                        # print("length error")
+                        return render(request, 'signup.html', data)
+                else:
+                    messages.info(request, "Password doesn't match!")
+                    return render(request, 'signup.html', data)
         else:
-            messages.info(request, "All fields are required")
+            messages.info(request, "All fields are required!")
             return render(request, 'signup.html', data)
     else:
         return render(request, 'signup.html')
@@ -94,9 +105,11 @@ def sign_up(request):
 
 def sign_in(request):
     if request.method== 'POST':
+        # user inputs
         u_name= request.POST.get('user_name')
         password = request.POST.get('password')
         userData= UserSignUp.get_email(u_name)
+        # validating user
         if userData:
             flag= check_password(password, userData.password)
             if flag:
@@ -111,12 +124,11 @@ def sign_in(request):
             messages.info(request, 'Invalid user name')
             return render(request, 'sign_in.html')
 
-        # return render(request, 'sign_in.html')
-        
+        # return render(request, 'sign_in.html')   
     else:
-       
         return render(request, 'sign_in.html')
 
+# user logout function
 def log_out(request):
     logout(request)
     return redirect('home')
