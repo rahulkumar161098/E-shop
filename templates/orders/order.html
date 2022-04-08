@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block cssfile %}
-<link rel="stylesheet" href="{% static 'css/order.css' %}">
+<link rel="stylesheet" href="../../static/css/order.css">
 {% endblock %}
 
 {% block content %}
 {% load cart %}
 
-<div class="container" style="width: 50%; ">
+<div class="order_plate">
   <!-- show message -->
   {% if messages %}
   <div class="alert alert-danger" role="alert">
@@ -29,7 +29,7 @@
   </div>
 
   <!-- cart list section -->
-  <div class="row hello" style="width: 100%; height: 100px; border: 1px solid gray; overflow: scroll;">
+  <div class="row cart_product">
     <div class="col-md-8">
       <table class="table">
         <tbody>
@@ -62,15 +62,18 @@
   </div>
 
   <!-- address section -->
-  <span">Please select address</span>
-    <div class="address" style="border: 1px solid gray; width: 100%; height: 150px; overflow: scroll;">
-
+  <span class="address_heading">Please select address</span>
+    <div class="all_address">
+      
       {% for address in userAddress %}
-      <div>
-        {{address.name}}<br />
-        {{address.mobile}}<br />
-        {{address.local_address}}<br />
-        {{address.city}}
+      <h6> <input type="radio"> Address {{ forloop.counter }}</h6>
+      <div class="address">
+        
+        <input type="text" name="addres_id" hidden value="{{address.id}}">
+        <span class="address_field"> Name: {{address.name}}</span>
+        <span class="address_field">Phone : {{address.mobile}}</span>
+        <span class="address_field">Local Address: {{address.local_address}} {{address.city}}</span>
+        <!-- <span class="address_field">{{address.city}}</span> -->
         <hr>
       </div>
       {% endfor %}
@@ -78,7 +81,7 @@
     </div>
     <div>
       <!-- Button trigger modal -->
-      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="add_address_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add new Address
       </button>
     </div>
@@ -100,24 +103,18 @@
         <!-- refers to payment button -->
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      
-      
+
+
 
       <form action="https://www.example.com/payment/success/" method="POST">
-        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_3Xjh9rRVSDJ3Lu" data-amount='50000'
-            data-currency="INR" 
-            data-order_id='{{payment.id}}' 
-            data-buttontext="Place order" 
-            data-name="E-shop"
-            data-description="Pay with sefty"
-            data-image="https://picsum.photos/110/110" 
-            data-prefill.name="Rahul Kumar"
-            data-prefill.email="rahul.kumar@example.com" 
-            data-theme.color="#63c9e0">
-            </script>
-    
+        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_3Xjh9rRVSDJ3Lu"
+          data-amount='50000' data-currency="INR" data-order_id='{{payment.id}}' data-buttontext="Place order"
+          data-name="E-shop" data-description="Pay with sefty" data-image="https://picsum.photos/110/110"
+          data-prefill.name="Rahul Kumar" data-prefill.email="rahul.kumar@example.com" data-theme.color="#63c9e0">
+          </script>
+
         <input type="hidden" custom="Hidden Element" name="hidden">
-    </form>
+      </form>
 
 
 

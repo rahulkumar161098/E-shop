@@ -1,3 +1,57 @@
-.container{
-    background-color: rgba(231, 231, 231, 0.527);
+.order_plate{
+    background-color: rgba(255, 255, 255, 0.199);
+    width: 50%;
+    margin: 0 auto;
+    height: max-content;
+    padding: 10px;
+    border: 1px solid gray; 
 }
+.cart_product{
+    width: 100%; 
+    height: 100px;
+    border: 1px solid gray; overflow: scroll;
+    margin-left: 0px;
+}
+.address_heading{
+    margin-top: 10px;
+}
+.all_address{
+    border: 1px solid gray; width: 100%;
+    height: 150px; 
+    overflow: scroll;
+    padding: 5px;
+}
+h6{
+
+}
+.address_field{
+    font-size: 13px;
+    display: block;
+    color: rgb(94, 94, 94);
+    margin-left: 20px;
+    margin-top: -5px;
+    font-weight: 500;
+}
+hr{
+    margin-top: 0px;
+}
+.add_address_btn{
+    border: none;
+    background: none;
+    color: blue;
+    font-size: 15px;
+}
+.total_amount{
+    margin: 10px 0px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.razorpay-payment-button{
+    background: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: rgb(2, 179, 238);
+}
+
+

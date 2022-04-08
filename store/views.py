@@ -142,17 +142,26 @@ def cart_views(request):
     cart_items={
         'cart_product': cart_product,
     }
-    # print(cart)
-    return render(request, 'cart.html', cart_items)
+    # checking items in card
+    # print("cart keys", cart)
+    # print(len(cart))
+    # print('cart products :',cart_product)
+    if len(cart) ==0:
+        # return HttpResponse("no product in cart")
+        return render(request, 'no_product_in_cart.html')
+    else:
+        return render(request, 'cart.html', cart_items)
 
 
 #check out
 def check_out(request):
     # show user address
     u_id=request.session.get('user_id')
+
     # print(u_id)
     cart= list(request.session.get('cart').keys())
     print('keys',cart)
+    
     userAddress= Address.objects.filter(user_id=u_id)
     # print(userAddress)
 
@@ -189,14 +198,10 @@ def check_out(request):
         state= request.POST['state']
 
         # form validations
-        if user and name and mobile and address and pin and city and state  !='':
 
-            set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
-            set_address.save()
-            return redirect('checkOut')
-        else:
-            messages.info(request, "All fields are required")
-            return redirect('checkOut')
+        set_address= Address(user_id=user, name=name, mobile=mobile, local_address=address, city=city, zip_code=pin, lend_mark=lend_mark, state= state)
+        set_address.save()
+        return redirect('checkOut')
     return render(request, 'orders/order.html', allAddress)
 
 
