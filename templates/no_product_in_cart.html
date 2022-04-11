@@ -5,12 +5,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="no_pro_in_">
+<div class="no_pro_in_cart">
+    <h2>No product in Cart</h2>
     <div class="text">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error numquam explicabo ipsam quod ex porro blanditiis veritatis quia, laboriosam doloribus! In mollitia minima aliquid, aut molestias earum rem totam officia. Error, rem, ex repellendus id quia natus quaerat praesentium facilis fuga esse sapiente consectetur, recusandae culpa atque! Soluta.
+    <table class="table table-bordered my-6 ">
+        <thead class="table-secondary">
+            <tr>
+                <th scope="col">So no.</th>
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Qunatity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Remove</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+    </table>
 </div>
 <div class="back_to_home_btn">
-    <button>Back to Home</button>
+    <button><a href="{% url 'home' %}"> Back to Home </a></button>
 </div>
 </div>
 

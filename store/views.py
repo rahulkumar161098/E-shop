@@ -1,5 +1,6 @@
 from optparse import Values
 from re import U
+import re
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Product, Category,UserSignUp, Address
@@ -43,11 +44,22 @@ def home(request):
 
     # showing all items 
     prod= Product.objects.filter(category=1)
+
+    # filtered by mobiles
     filter_by_mobile= Product.objects.filter(category=4)
-    print('filer_by_mobile : ',filter_by_mobile)
+    # print('filer_by_mobile : ',filter_by_mobile)
+
+    # deal of the day
+    deal_of_the_day= Product.objects.filter(mark='DD')
+    print('dealof the day', deal_of_the_day)
+    
+    # all category
     cat= Category.objects.all()
+
     print('user id : ' ,request.session.get('user_id'))
     print('you are : ' ,request.session.get('email'))
+
+    # creating a dic
     data= {
         'products': prod,
         'category': cat,
@@ -203,6 +215,14 @@ def check_out(request):
         set_address.save()
         return redirect('checkOut')
     return render(request, 'orders/order.html', allAddress)
+
+
+# show on product
+def product_details(request, id):
+    details_page= Product.objects.get(id=id)
+
+
+    return render(request, 'show_one_pro.html', {'details_page': details_page})
 
 
 # payment function or fimall process

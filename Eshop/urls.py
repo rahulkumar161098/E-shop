@@ -14,7 +14,8 @@ urlpatterns = [
     path('logout/', views.log_out, name='log_out'),
     path('cart/', views.cart_views, name='cart'),
     path('check_out/', views.check_out, name="checkOut"),
-    path('payment/', views.payment, name='payment_link')
+    path('payment/', views.payment, name='payment_link'),
+    path('product_details/<int:id>', views.product_details, name='product_details')
 ] 
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:

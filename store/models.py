@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -5,9 +6,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Product(models.Model):
+    MARK= [
+        ('--', '-----------'),
+        ('DD', 'Deal of the day'),
+        ('BS', 'Best Seller')
+    ]
     name= models.CharField(max_length=50)
     price= models.IntegerField()
     category= models.ForeignKey('Category', on_delete=models.CASCADE, default=1)
+    mark= models.CharField(choices=MARK, null=True, default='null', max_length=20)
     img= models.FileField(upload_to='product_img')
     des= models.CharField(max_length=200)
 
