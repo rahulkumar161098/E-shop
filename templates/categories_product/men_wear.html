@@ -20,7 +20,7 @@
     <div class="owl-carousel owl-theme">
         {% for product in products %}
         <div class="filter_card">
-            <a href="#" style="text-decoration: none;">
+            <a href="/product_details/{{ product.id }}" style="text-decoration: none;">
                 <div class="product_card" id='{{product.id}}'>
                     <div class="product_img">
                         <img src="download/{{product.img}}" alt="">

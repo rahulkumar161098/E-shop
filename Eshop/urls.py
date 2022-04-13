@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.contrib import admin
 from django.urls import path, include
 from store import views
@@ -15,7 +16,8 @@ urlpatterns = [
     path('cart/', views.cart_views, name='cart'),
     path('check_out/', views.check_out, name="checkOut"),
     path('payment/', views.payment, name='payment_link'),
-    path('product_details/<int:id>', views.product_details, name='product_details')
+    path('product_details/<int:id>', views.product_details, name='product_details'),
+    path('all_mobiles/', views.all_product_of_mobiles, name='all_mobile_product'),
 ] 
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:

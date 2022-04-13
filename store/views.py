@@ -220,10 +220,23 @@ def check_out(request):
 # show on product
 def product_details(request, id):
     details_page= Product.objects.get(id=id)
+    details={
+        'details_page': details_page
+    }
+
+    return render(request, 'show_one_pro.html', details)
 
 
-    return render(request, 'show_one_pro.html', {'details_page': details_page})
-
+# all products from one category
+def all_product_of_mobiles(request):
+    all_mobiles= Product.objects.filter(category=4)
+    # price_filter= Product.objects.filter('price' >= 9999)
+    mobiles={
+        'all_mobiles': all_mobiles
+    }
+    print('all mobiles ', all_mobiles)
+    # print(price_filter)
+    return render (request, 'all_product_mobile.html', mobiles) 
 
 # payment function or fimall process
 def payment(request):

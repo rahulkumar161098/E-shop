@@ -6,9 +6,10 @@ class ProductView(admin.ModelAdmin):
     list_display=('name','category', 'price', 'img')
 admin.site.register(Product, ProductView)
 
-# class CategoryView(admin.ModelAdmin):
-#     list_display=('category')
-admin.site.register(Category)
+class CategoryView(admin.ModelAdmin):
+    list_display=('id', 'category')
+admin.site.register(Category, CategoryView)
+
 class userView(admin.ModelAdmin):
     list_display=('id', 'u_name', 'date')
 admin.site.register(UserSignUp, userView)

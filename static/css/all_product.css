@@ -1,0 +1,22 @@
+.main_container{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+
+}
+.category{
+    width: 20%;
+    height: 100%;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+
+}
+.all_product{
+    width: 80%;
+    height: 100%;
+    border: 1px solid gray;
+    padding: 10px;
+    flex-wrap: wrap;
+}

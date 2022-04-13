@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="../static/css/all_product.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main_container">
+    <div class="category">
+        category
+    </div>
+    <div class="all_product">
+        {% for mobile in all_mobiles %}
+        hello
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -11,22 +11,29 @@
 <div class="details_container">
     <div class="row">
         <div class="col md-6 details_product_img">
-            <img src="download/{{ details_page.img }} alt="">
-            
+            <img src="/download/{{details_page.img}}" alt="">
+
         </div>
         <div class=" col md-6 details_product_about">
-            <h3>
+            <h3 class="product_title">
                 {{ details_page.name }}
             </h3>
-            <p>{{ details_page.des }}</p>
-            <p>{{ details_page.price }}</p>
+            <p class="product_detaila">{{ details_page.des }}</p>
+            <div class="product_price_section">
+                <span class="product_actual_price">{{ details_page.price }}</span>
+                <span class="product_off"> 50%</span>
+                <span class="product_selling
+                _product"> <del>20000</del> </span>
+            </div>
             <div class="details_product_footer">
                 <a href="#"> Add to cart</a>
                 <a href="#"> Buy now</a>
             </div>
         </div>
     </div>
-
+</div>
+<div class="similar_product_card">
+    <!-- {% include 'categories_product/men_wear.html' %} -->
 </div>
 
 {% endblock %}
