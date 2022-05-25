@@ -18,7 +18,9 @@ urlpatterns = [
     path('payment/', views.payment, name='payment_link'),
     path('product_details/<int:id>', views.product_details, name='product_details'),
     path('all_mobiles/', views.all_product_of_mobiles, name='all_mobile_product'),
-] 
+    path('search/', views.search, name="search")
+]
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

@@ -39,18 +39,33 @@
     padding: 4px 0px 4px 10px;
     /* border-radius: 30px; */
 }
-.section_title{
+/* .section_title{
     font-size: 30px;
     color: rgb(3, 141, 187);
     font-weight: 700;
     letter-spacing: 1px;
     
-}
-.section_link{
+} */
+/* .section_link{
     font-size: 15px;
     padding: 0px 15px 0px 0px;
     line-height: 45px;
 }
 .section_link a{
     text-decoration: none;
+} */
+
+.mobile{
+    width: 100%;
+    height: 500px;
+    margin: 20px 0px 0px 0px;
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
 }
+/* .mobile div{
+    width: 200px;
+    height: 100px;
+    margin: 20px 0px;
+    border: 1px solid red;
+} */

@@ -3,7 +3,7 @@ from store.models import Product, Category, UserSignUp, Address, orders
 
 # Register your models here.
 class ProductView(admin.ModelAdmin):
-    list_display=('name','category', 'price', 'img')
+    list_display=('name', 'id', 'category', 'price', 'img', 'data')
 admin.site.register(Product, ProductView)
 
 class CategoryView(admin.ModelAdmin):

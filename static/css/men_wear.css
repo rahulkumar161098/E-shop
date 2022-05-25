@@ -1,0 +1,26 @@
+.section{
+    margin-top: 80px;
+}
+.filter_card{
+    margin: 5px 12px 0px 12px;
+}
+/*
+.product_section_title{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 0px 10px;
+    margin: 10px 0px;
+    border-bottom: 2px solid gray;
+}
+h3{
+    color: rgb(214, 214, 214);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+span{
+    margin-top: 8px;
+}
+span a{
+    text-decoration: none;
+} */

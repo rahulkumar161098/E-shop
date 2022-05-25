@@ -1,6 +1,8 @@
 
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 # Create your models here.
@@ -17,6 +19,7 @@ class Product(models.Model):
     mark= models.CharField(choices=MARK, null=True, default='null', max_length=20)
     img= models.FileField(upload_to='product_img')
     des= models.CharField(max_length=200)
+    data= models.DateTimeField(auto_now=True)
 
 
 

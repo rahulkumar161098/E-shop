@@ -13,7 +13,7 @@
 <div class="main_section">
     <div class="row">
 
-    <!-- category section -->
+        <!-- category section -->
         <div class="products_category col-2">
             {% include 'category.html' %}
         </div>
@@ -26,46 +26,25 @@
                 {% include 'slider.html' %}
             </div>
 
-            <!-- deal of the day section -->
-            <div class="deal_of_the_day_section">
-                <div class="deal_of_the_day">
-                    <div class="section_title">
-                        Deal of the day
-                    </div>
-                    <div class="section_link">
-                        <a href="{% url 'all_mobile_product' %}"> See All </a>
-                    </div>
-                </div>
-
-
-                <!-- other card -->
-                <div class="section_products">
-                    {% include 'categories_product/men_wear.html' %}
-                </div>
-            </div>
-
-
-            <!-- mobile phone section -->
-            <div class="women_cloth_section">
-                <div class="section_heading">
-                    <div class="section_title">
-                        Mobiles
-                    </div>
-                    <div class="section_link">
-                        <a href=""> See All </a>
-                    </div>
-                </div>
-                <div class="section_products">
-                    {% include 'categories_product/women_wear.html' %}
-                </div>
-            </div>
-
-            <div>
+            <!-- other card -->
+            <div class="section_products">
                 {% include 'categories_product/men_wear.html' %}
             </div>
 
+            <!-- limitted products -->
+            <div class="product_section">
+                {% include 'categories_product/limited_product.html' %}
+            </div>
+
+            <!-- lady wear -->
+            {% include 'categories_product/women_wear.html' %}
+
         </div>
+
+        
+
     </div>
+</div>
 </div>
 
 
